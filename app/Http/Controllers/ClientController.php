@@ -8,23 +8,38 @@ use Illuminate\Support\Facades\Hash;
 
 class ClientController extends Controller
 {
-    public function ClientPage(){
+    public function ClientPage()
+    {
         return view('Clients');
     }
-     public function ClientAdd(){
+
+    public function ClientAdd()
+    {
         return view('AddClients');
     }
-    public function store(Request $req){
-        $Nom =$req->nom;
-        $Prenom =$req->prenom;
-        $Email =$req->email;
-        $password= $req->password;
+
+    public function store(Request $req)
+    {
+        $Nom = $req->nom;
+        $Prenom = $req->prenom;
+        $Email = $req->email;
+        $password = $req->password;
+
         Client::create([
-            'Nom' =>$Nom,
-            'Prenom' =>$Prenom,
-            'Email' =>$Email,
-            'Password' =>Hash::make($password),
+            'Nom' => $Nom,
+            'Prenom' => $Prenom,
+            'Email' => $Email,
+            'Password' => Hash::make($password),
         ]);
-        return view('AddClients');
+
+        return redirect()->back()->with('success', 'Client ajouté avec succès !');
+    }
+
+    public function showAllClients()
+    {
+        $clients = Client::paginate(10);
+        return view('Clients', [
+            'clients' => $clients
+        ]);
     }
 }

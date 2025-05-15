@@ -18,22 +18,27 @@ class ClientController extends Controller
         return view('AddClients');
     }
 
-    public function store(Request $req)
-    {
-        $Nom = $req->nom;
-        $Prenom = $req->prenom;
-        $Email = $req->email;
-        $password = $req->password;
+public function store(Request $req)
+{
+    $Nom = $req->nom;
+    $Prenom = $req->prenom;
+    $Email = $req->email;
+    $password = $req->password;
 
+    if (
         Client::create([
             'Nom' => $Nom,
             'Prenom' => $Prenom,
             'Email' => $Email,
             'Password' => Hash::make($password),
-        ]);
-
-        return redirect()->back()->with('success', 'Client ajouté avec succès !');
+        ])
+    ) {
+        return to_route('clients.clients')->with('success', 'Client ajouté avec succès');
+    } else {
+        return to_route('clients.clients')->with('error', 'Erreur lors de l\'ajout du client');
     }
+}
+
 
     public function showAllClients()
     {

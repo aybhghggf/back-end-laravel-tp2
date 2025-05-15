@@ -1,10 +1,11 @@
 @extends('layouts.base')
-
+@section('title') Add @endsection
 @section('Addclient')
     <div class="container mt-5">
     <h2 class="mb-4">Ajouter un Client</h2>
-    <form action="{{    route('store.store')  }}" method="POST">
+    <form action="{{  route('store.store')  }}" method="POST">
         @csrf
+        @method('PUT')
       <div class="mb-3">
         <label for="nom" class="form-label">Nom</label>
         <input type="text" class="form-control" id="nom" name="nom" required>

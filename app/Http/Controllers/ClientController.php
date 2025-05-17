@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClientRequest;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -18,8 +19,11 @@ class ClientController extends Controller
         return view('AddClients');
     }
 
-public function store(Request $req)
+public function store(ClientRequest $req)
 {
+    $req->validated();
+    
+
     $Nom = $req->nom;
     $Prenom = $req->prenom;
     $Email = $req->email;

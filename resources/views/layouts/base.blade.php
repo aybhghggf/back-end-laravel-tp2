@@ -34,6 +34,9 @@
             <a href="{{ route('clients.clients') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
               Voir les Clients
             </a>
+                        <a href="{{ route('Login.show') }}" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+              Se connecter
+            </a>
           </div>
         </div>
       </div>
@@ -55,6 +58,7 @@
   <main>
     @yield('Clients')
     @yield('Addclient')
+    @yield('Login')
   </main>
 </body>
 </html>
